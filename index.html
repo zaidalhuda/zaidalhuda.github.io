@@ -587,13 +587,11 @@
                 <h2 class="section-title">About</h2>
                 <div class="about-content">
                     <div class="about-text">
-                        <p>I am a Senior Lecturer (Research Associate Professor) at <span class="highlight">Stirling College, Chengdu University (CDU)</span>, specializing in Computer Vision, Explainable AI (XAI), and Deep Learning Applications. My research focuses on developing innovative solutions for image segmentation, AI for infrastructure inspection, and medical image analysis.</p>
+                        <p>I am a Senior Lecturer (Research Associate Professor) at Stirling College, Chengdu University, specializing in Computer Vision, Explainable AI, and Deep Learning Applications. My research addresses critical challenges in image segmentation, infrastructure inspection automation, and medical image analysis.</p>
                         
-                        <p>With a Ph.D. in Computer Science and Technology from Southwest Jiaotong University (2021), I have established myself as a leading researcher in AI and computer vision applications. My work bridges theoretical advances with practical applications, particularly in <span class="highlight">pavement crack detection</span> and <span class="highlight">medical image analysis</span>.</p>
+                        <p>I hold a Ph.D. in Computer Science and Technology from Southwest Jiaotong University (2021), an M.Tech. in Artificial Intelligence from the University of Hyderabad (2015), and a B.Sc. in Computer Engineering from Aleppo University (2011). My professional experience includes roles as Postdoctoral Research Fellow and Lecturer at Southwest Jiaotong University and the SWJTU-LEEDS Joint School.</p>
                         
-                        <p>As Principal Investigator of China's National Foreign Experts Programme for Young Foreign Talents, I lead cutting-edge research in developing cost-effective crack segmentation systems. My innovations have resulted in <span class="highlight">two granted patents</span> and have attracted significant funding from national and international sources.</p>
-                        
-                        <p>I am passionate about making AI more interpretable and accessible, with a particular focus on weakly supervised learning techniques that can work with minimal labeled data - a crucial advancement for real-world applications.</p>
+                        <p>My research focuses on developing weakly supervised image segmentation algorithms that achieve robust performance with minimal labeled training data. This approach addresses the annotation bottleneck in computer vision applications, bridging theoretical AI advances with practical deployment in infrastructure monitoring and medical diagnostics.</p>
                     </div>
                     <div class="stats">
                         <h3 style="margin-bottom: 1rem; color: #2c3e50;">Research Impact</h3>
@@ -1033,7 +1031,7 @@
             sections.forEach(section => {
                 section.style.display = 'block';
             });
-            updateActiveFilter('showAll()');
+            updateActiveFilter('All Publications');
         }
 
         function filterByCategory(category) {
@@ -1045,14 +1043,23 @@
                     section.style.display = 'none';
                 }
             });
-            updateActiveFilter(`filterByCategory('${category}')`);
+            
+            // Update button text based on category
+            let buttonText = '';
+            switch(category) {
+                case 'infrastructure': buttonText = 'AI for Infrastructure'; break;
+                case 'medical': buttonText = 'Medical Image Analysis'; break;
+                case 'computer-vision': buttonText = 'Computer Vision & AI'; break;
+                case 'transportation': buttonText = 'Transportation & Traffic'; break;
+            }
+            updateActiveFilter(buttonText);
         }
 
-        function updateActiveFilter(activeFunction) {
+        function updateActiveFilter(activeButtonText) {
             const buttons = document.querySelectorAll('.filter-btn');
             buttons.forEach(btn => {
                 btn.classList.remove('active');
-                if (btn.getAttribute('onclick') === activeFunction) {
+                if (btn.textContent.trim() === activeButtonText) {
                     btn.classList.add('active');
                 }
             });
