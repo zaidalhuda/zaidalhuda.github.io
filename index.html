@@ -419,6 +419,23 @@
             font-style: italic;
         }
 
+        /* Contact email links */
+        .contact-item a {
+            color: #3498db;
+            text-decoration: none;
+            transition: color 0.3s ease;
+        }
+
+        .contact-item a:hover {
+            color: #2c3e50;
+            text-decoration: underline;
+        }
+
+        /* Smooth scrolling enhancement */
+        html {
+            scroll-behavior: smooth;
+        }
+
         /* Awards */
         .awards-grid {
             display: grid;
@@ -882,7 +899,7 @@
         </section>
 
         <!-- Awards -->
-        <section id="awards" class="section">
+        <section id="funding" class="section">
             <div class="container">
                 <h2 class="section-title">Funding Projects & Patents</h2>
                 
@@ -959,7 +976,8 @@
                     <div class="contact-item">
                         <div class="contact-icon"><i class="fas fa-envelope"></i></div>
                         <h3>Email</h3>
-                        <p>zaid@stir.cdu.edu.cn<br>zh6@stir.ac.uk</p>
+                        <p><a href="mailto:zaid@stir.cdu.edu.cn">zaid@stir.cdu.edu.cn</a><br>
+                        <a href="mailto:zh6@stir.ac.uk">zh6@stir.ac.uk</a></p>
                     </div>
                     <div class="contact-item">
                         <div class="contact-icon"><i class="fas fa-phone"></i></div>
