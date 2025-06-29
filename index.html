@@ -307,6 +307,7 @@
             justify-content: center;
             gap: 1rem;
             margin-bottom: 2rem;
+            flex-wrap: wrap;
         }
 
         .filter-btn {
@@ -317,11 +318,27 @@
             border-radius: 25px;
             cursor: pointer;
             transition: all 0.3s ease;
+            font-size: 0.9rem;
         }
 
         .filter-btn.active, .filter-btn:hover {
             background: #3498db;
             color: white;
+        }
+
+        .pub-section {
+            margin-bottom: 3rem;
+        }
+
+        .pub-section-title {
+            font-size: 1.5rem;
+            color: #2c3e50;
+            margin-bottom: 1.5rem;
+            padding-bottom: 0.5rem;
+            border-bottom: 2px solid #3498db;
+            display: flex;
+            align-items: center;
+            gap: 0.5rem;
         }
 
         .publications-list {
@@ -335,17 +352,31 @@
             border-radius: 10px;
             box-shadow: 0 2px 10px rgba(0,0,0,0.1);
             border-left: 4px solid #3498db;
+            transition: transform 0.3s ease;
+        }
+
+        .pub-item:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 5px 20px rgba(0,0,0,0.15);
         }
 
         .pub-title {
             font-weight: bold;
             color: #2c3e50;
             margin-bottom: 0.5rem;
+            line-height: 1.4;
         }
 
         .pub-journal {
             color: #3498db;
             font-style: italic;
+            margin-bottom: 0.5rem;
+            font-weight: 500;
+        }
+
+        .pub-year {
+            color: #666;
+            font-size: 0.9rem;
             margin-bottom: 0.5rem;
         }
 
@@ -357,6 +388,22 @@
             border-radius: 12px;
             font-size: 0.8rem;
             margin-right: 0.5rem;
+            font-weight: 500;
+        }
+
+        .pub-impact.q1 {
+            background: #e74c3c;
+        }
+
+        .pub-impact.if-high {
+            background: #9b59b6;
+        }
+
+        .pub-authors {
+            color: #666;
+            font-size: 0.9rem;
+            margin-top: 0.5rem;
+            font-style: italic;
         }
 
         /* Awards */
@@ -470,7 +517,7 @@
             <div class="hero-content">
                 <div class="hero-text">
                     <h1>Dr. Zaid Al-Huda</h1>
-                    <p class="title">Distinguished Associate Research Fellow</p>
+                    <p class="title">Senior Lecturer (Research Associate Professor)</p>
                     <p class="affiliation">Stirling College, Chengdu University (CDU)<br>Computer Vision • Explainable AI • Deep Learning</p>
                     <div class="contact-links">
                         <a href="mailto:zaid@stir.cdu.edu.cn"><i class="fas fa-envelope"></i> Email</a>
@@ -480,7 +527,7 @@
                     </div>
                 </div>
                 <div class="hero-image">
-                    <img src="data:images/ZAID.jpg,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 200 200'%3E%3Ccircle cx='100' cy='100' r='90' fill='%23ddd'/%3E%3Ctext x='100' y='110' text-anchor='middle' font-family='Arial' font-size='16' fill='%23666'%3EProfile Photo%3C/text%3E%3C/svg%3E" alt="Dr. Zaid Al-Huda">
+                    <img src="images/ZAID.jpg" alt="Dr. Zaid Al-Huda">
                 </div>
             </div>
         </div>
@@ -510,7 +557,7 @@
                 <h2 class="section-title">About</h2>
                 <div class="about-content">
                     <div class="about-text">
-                        <p>I am a Distinguished Associate Research Fellow at <span class="highlight">Stirling College, Chengdu University (CDU)</span>, specializing in Computer Vision, Explainable AI (XAI), and Deep Learning Applications. My research focuses on developing innovative solutions for image segmentation, AI for infrastructure inspection, and medical image analysis.</p>
+                        <p>I am a Senior Lecturer (Research Associate Professor) at <span class="highlight">Stirling College, Chengdu University (CDU)</span>, specializing in Computer Vision, Explainable AI (XAI), and Deep Learning Applications. My research focuses on developing innovative solutions for image segmentation, AI for infrastructure inspection, and medical image analysis.</p>
                         
                         <p>With a Ph.D. in Computer Science and Technology from Southwest Jiaotong University (2021), I have established myself as a leading researcher in AI and computer vision applications. My work bridges theoretical advances with practical applications, particularly in <span class="highlight">pavement crack detection</span> and <span class="highlight">medical image analysis</span>.</p>
                         
@@ -585,7 +632,7 @@
                 <div class="timeline">
                     <div class="timeline-item">
                         <div class="timeline-date">2024 – Present</div>
-                        <div class="timeline-title">Distinguished Associate Research Fellow</div>
+                        <div class="timeline-title">Senior Lecturer (Research Associate Professor)</div>
                         <div class="timeline-org">Stirling College, Chengdu University (CDU)</div>
                         <p>Leading research in AI and Computer Vision at this collaborative partnership between the University of Stirling (UK) and Chengdu University (China). Focus on developing innovative solutions for infrastructure inspection and medical image analysis.</p>
                     </div>
@@ -614,46 +661,208 @@
         <!-- Publications -->
         <section id="publications" class="section" style="background: #f8f9fa;">
             <div class="container">
-                <h2 class="section-title">Selected Publications</h2>
+                <h2 class="section-title">Publications</h2>
                 <div class="pub-filters">
-                    <button class="filter-btn active">All</button>
-                    <button class="filter-btn">Q1 Journals</button>
-                    <button class="filter-btn">Computer Vision</button>
-                    <button class="filter-btn">Medical AI</button>
+                    <button class="filter-btn active" onclick="showAll()">All Publications</button>
+                    <button class="filter-btn" onclick="filterByCategory('infrastructure')">AI for Infrastructure</button>
+                    <button class="filter-btn" onclick="filterByCategory('medical')">Medical Image Analysis</button>
+                    <button class="filter-btn" onclick="filterByCategory('computer-vision')">Computer Vision & AI</button>
+                    <button class="filter-btn" onclick="filterByCategory('transportation')">Transportation & Traffic</button>
                 </div>
-                <div class="publications-list">
-                    <div class="pub-item">
-                        <div class="pub-title">Asymmetric Dual-Decoder-U-Net for Pavement Crack Semantic Segmentation</div>
-                        <div class="pub-journal">Automation in Construction (2023)</div>
-                        <span class="pub-impact">IF: 9.6</span>
-                        <span class="pub-impact">Q1</span>
-                        <p>Novel architecture for improved crack detection in infrastructure monitoring applications.</p>
-                    </div>
-                    <div class="pub-item">
-                        <div class="pub-title">A hybrid deep learning pavement crack semantic segmentation</div>
-                        <div class="pub-journal">Engineering Applications of Artificial Intelligence (2023)</div>
-                        <span class="pub-impact">IF: 7.5</span>
-                        <span class="pub-impact">Q1</span>
-                        <p>Comprehensive approach combining multiple deep learning techniques for robust crack detection.</p>
-                    </div>
-                    <div class="pub-item">
-                        <div class="pub-title">Weakly supervised semantic segmentation by iteratively refining optimal segmentation with deep cues guidance</div>
-                        <div class="pub-journal">Neural Computing and Applications (2021)</div>
-                        <span class="pub-impact">IF: 4.5</span>
-                        <span class="pub-impact">Q2</span>
-                        <p>Innovative approach to reduce annotation requirements while maintaining high segmentation quality.</p>
-                    </div>
-                    <div class="pub-item">
-                        <div class="pub-title">Deep learning myocardial infarction segmentation framework from cardiac magnetic resonance images</div>
-                        <div class="pub-journal">Biomedical Signal Processing and Control (2023)</div>
-                        <span class="pub-impact">IF: 4.9</span>
-                        <span class="pub-impact">Q2</span>
-                        <p>Advanced medical imaging application for cardiac diagnosis and treatment planning.</p>
+
+                <!-- AI for Infrastructure -->
+                <div class="pub-section" data-category="infrastructure">
+                    <h3 class="pub-section-title">
+                        <i class="fas fa-road"></i>
+                        AI for Infrastructure & Crack Detection
+                    </h3>
+                    <div class="publications-list">
+                        <div class="pub-item">
+                            <div class="pub-title">Asymmetric Dual-Decoder-U-Net for Pavement Crack Semantic Segmentation</div>
+                            <div class="pub-journal">Automation in Construction</div>
+                            <div class="pub-year">2023</div>
+                            <span class="pub-impact q1">IF: 9.6</span>
+                            <span class="pub-impact">Q1</span>
+                            <div class="pub-authors">Zaid Al-Huda, Bo Peng, Riyadh Algburi, Mugahed A Al-antari, Rabea AL-Jarazi, Donghai Zhai</div>
+                        </div>
+                        <div class="pub-item">
+                            <div class="pub-title">A hybrid deep learning pavement crack semantic segmentation</div>
+                            <div class="pub-journal">Engineering Applications of Artificial Intelligence</div>
+                            <div class="pub-year">2023</div>
+                            <span class="pub-impact if-high">IF: 7.5</span>
+                            <span class="pub-impact">Q1</span>
+                            <div class="pub-authors">Zaid Al-Huda, Bo Peng, Riyadh Algburi, Mugahed A Al-antari, Rabea AL-Jarazi, Donghai Zhai</div>
+                        </div>
+                        <div class="pub-item">
+                            <div class="pub-title">Lightweight Yet Effective: A Modular Approach to Crack Segmentation</div>
+                            <div class="pub-journal">IEEE Transactions on Intelligent Vehicles</div>
+                            <div class="pub-year">2024</div>
+                            <span class="pub-impact q1">IF: 14.0</span>
+                            <span class="pub-impact">Q1</span>
+                            <div class="pub-authors">Omar Al-maqtari, Bo Peng, Zaid Al-Huda, Abdulrahman Al-Malahi, Naseebah Maqtary</div>
+                        </div>
+                        <div class="pub-item">
+                            <div class="pub-title">A bio-inspired network with automatic brightness adaptation for pavement crack detection in different environments</div>
+                            <div class="pub-journal">IEEE Transactions on Instrumentation and Measurement</div>
+                            <div class="pub-year">2024</div>
+                            <span class="pub-impact if-high">IF: 5.6</span>
+                            <span class="pub-impact">Q1</span>
+                            <div class="pub-authors">Zhenguang Zhang, Zaid Al-Huda, Bo Peng, Jie Hu</div>
+                        </div>
+                        <div class="pub-item">
+                            <div class="pub-title">Improvement of an Industrial Robotic Flaw Detection System</div>
+                            <div class="pub-journal">IEEE Transactions on Automation Science and Engineering</div>
+                            <div class="pub-year">2022</div>
+                            <span class="pub-impact if-high">IF: 5.9</span>
+                            <span class="pub-impact">Q1</span>
+                            <div class="pub-authors">Riyadh Algburi, Gao Hongli, Zaid Al-Huda</div>
+                        </div>
+                        <div class="pub-item">
+                            <div class="pub-title">Enhanced pavement crack segmentation with minimal labeled data: a triplet attention teacher-student framework</div>
+                            <div class="pub-journal">International Journal of Pavement Engineering</div>
+                            <div class="pub-year">2024</div>
+                            <span class="pub-impact">IF: 3.4</span>
+                            <span class="pub-impact">Q2</span>
+                            <div class="pub-authors">Mohammed Ameen Mohammed, Zheng Han, Yange Li, Zaid Al-Huda, Weidong Wang</div>
+                        </div>
                     </div>
                 </div>
-                <div style="text-align: center; margin-top: 2rem;">
-                    <a href="https://scholar.google.com/citations?hl=en&user=ZTvKDLAAAAAJ" class="contact-links" style="display: inline-block;">
-                        <i class="fas fa-external-link-alt"></i> View All Publications on Google Scholar
+
+                <!-- Medical Image Analysis -->
+                <div class="pub-section" data-category="medical">
+                    <h3 class="pub-section-title">
+                        <i class="fas fa-heartbeat"></i>
+                        Medical Image Analysis & Healthcare AI
+                    </h3>
+                    <div class="publications-list">
+                        <div class="pub-item">
+                            <div class="pub-title">Deep learning myocardial infarction segmentation framework from cardiac magnetic resonance images</div>
+                            <div class="pub-journal">Biomedical Signal Processing and Control</div>
+                            <div class="pub-year">2023</div>
+                            <span class="pub-impact">IF: 4.9</span>
+                            <span class="pub-impact">Q2</span>
+                            <div class="pub-authors">Mugahed A. Al-antari, Zakarya Farea Shaaf, M. Mahadi Abdul Jamil, Nagwan Abdel Samee, Reem Alkanhel, Muhammed Talo, Zaid Al-Huda (Correspondence)</div>
+                        </div>
+                        <div class="pub-item">
+                            <div class="pub-title">VcaNet: Vision Transformer with fusion channel and spatial attention module for 3D brain tumor segmentation</div>
+                            <div class="pub-journal">Computers in Biology and Medicine</div>
+                            <div class="pub-year">2025</div>
+                            <span class="pub-impact if-high">IF: 7.0</span>
+                            <span class="pub-impact">Q1</span>
+                            <div class="pub-authors">Dichao Pan, Jianguo Shen, Zaid Al-Huda, Mohammed A.A. Al-qaness</div>
+                        </div>
+                        <div class="pub-item">
+                            <div class="pub-title">PLDPNet: End-to-end hybrid deep learning framework for potato leaf disease prediction</div>
+                            <div class="pub-journal">Alexandria Engineering Journal</div>
+                            <div class="pub-year">2023</div>
+                            <span class="pub-impact if-high">IF: 6.2</span>
+                            <span class="pub-impact">Q1</span>
+                            <div class="pub-authors">Fizzah Arshad, Muhammad Mateen, Shaukat Hayat, Maryam Wardah, Zaid Al-Huda, Yeong Hyeon Gu, Mugahed A Al-antar</div>
+                        </div>
+                        <div class="pub-item">
+                            <div class="pub-title">Deep learning framework for rapid and accurate respiratory COVID-19 prediction using chest X-ray images</div>
+                            <div class="pub-journal">Journal of King Saud University-Computer and Information Sciences</div>
+                            <div class="pub-year">2023</div>
+                            <span class="pub-impact if-high">IF: 5.2</span>
+                            <span class="pub-impact">Q1</span>
+                            <div class="pub-authors">Chiagoziem C Ukwuoma, Dongsheng Cai, Md Belal Bin Heyat, Olusola Bamisile, Humphrey Adun, Zaid Al-Huda, Mugahed A Al-Antari</div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Computer Vision & AI -->
+                <div class="pub-section" data-category="computer-vision">
+                    <h3 class="pub-section-title">
+                        <i class="fas fa-eye"></i>
+                        Computer Vision & AI Methodologies
+                    </h3>
+                    <div class="publications-list">
+                        <div class="pub-item">
+                            <div class="pub-title">An overview of edge and object contour detection</div>
+                            <div class="pub-journal">Neurocomputing</div>
+                            <div class="pub-year">2022</div>
+                            <span class="pub-impact if-high">IF: 5.5</span>
+                            <span class="pub-impact">Q1</span>
+                            <div class="pub-authors">D Yang, B Peng, Zaid Al-Huda, A Malik, D Zhai</div>
+                        </div>
+                        <div class="pub-item">
+                            <div class="pub-title">FastPicker: Adaptive independent two-stage video-to-video summarization for efficient action recognition</div>
+                            <div class="pub-journal">Neurocomputing</div>
+                            <div class="pub-year">2023</div>
+                            <span class="pub-impact if-high">IF: 5.5</span>
+                            <span class="pub-impact">Q1</span>
+                            <div class="pub-authors">Saghir Alfasly, Jian Lu, Chen Xu, Zaid Al-Huda, Qingtang Jiang, Zhaosong Lu, Charles Chui</div>
+                        </div>
+                        <div class="pub-item">
+                            <div class="pub-title">OSRE: Object-to-Spot Rotation Estimation for Bike Parking Assessment</div>
+                            <div class="pub-journal">IEEE Transactions on Intelligent Transportation Systems</div>
+                            <div class="pub-year">2023</div>
+                            <span class="pub-impact if-high">IF: 7.9</span>
+                            <span class="pub-impact">Q1</span>
+                            <div class="pub-authors">Saghir Alfasly, Zaid Al-Huda, Saifullahi Aminu Bello, Ahmed Elazab, Jian Lu, Chen Xu</div>
+                        </div>
+                        <div class="pub-item">
+                            <div class="pub-title">Weakly supervised semantic segmentation by iteratively refining optimal segmentation with deep cues guidance</div>
+                            <div class="pub-journal">Neural Computing and Applications</div>
+                            <div class="pub-year">2021</div>
+                            <span class="pub-impact">IF: 4.5</span>
+                            <span class="pub-impact">Q2</span>
+                            <div class="pub-authors">Zaid Al-Huda, Bo Peng, Yan Yang, Riyadh Algburi</div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Transportation & Traffic -->
+                <div class="pub-section" data-category="transportation">
+                    <h3 class="pub-section-title">
+                        <i class="fas fa-car"></i>
+                        Transportation & Traffic Systems
+                    </h3>
+                    <div class="publications-list">
+                        <div class="pub-item">
+                            <div class="pub-title">FedAGAT: Real-time traffic flow prediction based on federated community and adaptive graph attention network</div>
+                            <div class="pub-journal">Information Sciences</div>
+                            <div class="pub-year">2024</div>
+                            <span class="pub-impact if-high">IF: 8.1</span>
+                            <span class="pub-impact">Q1</span>
+                            <div class="pub-authors">Rasha Al-Huthaifi, Tianrui Li, Zaid Al-Huda, Chongshou Li</div>
+                        </div>
+                        <div class="pub-item">
+                            <div class="pub-title">FedGODE: Secure traffic flow prediction based on federated learning and graph ordinary differential equation networks</div>
+                            <div class="pub-journal">Knowledge-Based Systems</div>
+                            <div class="pub-year">2024</div>
+                            <span class="pub-impact if-high">IF: 7.2</span>
+                            <span class="pub-impact">Q1</span>
+                            <div class="pub-authors">Rasha Al-Huthaifi, Tianrui Li, Zaid Al-Huda, Wei Huang, Zhipeng Luo, Peng Xie</div>
+                        </div>
+                        <div class="pub-item">
+                            <div class="pub-title">Interface Bonding Strength between Asphalt Pavement Layers under Mixed Shear-Tensile Mode: Laboratory Evaluation and Modeling Predictions</div>
+                            <div class="pub-journal">Journal of Materials in Civil Engineering</div>
+                            <div class="pub-year">2023</div>
+                            <span class="pub-impact">IF: 3.2</span>
+                            <span class="pub-impact">Q2</span>
+                            <div class="pub-authors">Rabea AL-Jarazi, Ali Rahman, Changfa Ai, Zaid Al-Huda, Babiker Lana Elabbas Abdelhliem</div>
+                        </div>
+                        <div class="pub-item">
+                            <div class="pub-title">Evaluation and prediction of interface fatigue performance between asphalt pavement layers: application of supervised machine learning techniques</div>
+                            <div class="pub-journal">International Journal of Pavement Engineering</div>
+                            <div class="pub-year">2024</div>
+                            <span class="pub-impact">IF: 3.4</span>
+                            <span class="pub-impact">Q2</span>
+                            <div class="pub-authors">Rabea AL-Jarazi, Ali Rahman, Changfa Ai, Chaoyang Li, Zaid Al-Huda</div>
+                        </div>
+                    </div>
+                </div>
+
+                <div style="text-align: center; margin-top: 3rem; padding-top: 2rem; border-top: 2px solid #3498db;">
+                    <div style="margin-bottom: 1rem;">
+                        <span style="font-size: 1.2rem; font-weight: bold; color: #2c3e50;">Complete Publication Record</span>
+                    </div>
+                    <a href="https://scholar.google.com/citations?hl=en&user=ZTvKDLAAAAAJ" class="contact-links" style="display: inline-block; margin-right: 1rem;">
+                        <i class="fas fa-graduation-cap"></i> Google Scholar
+                    </a>
+                    <a href="https://www.researchgate.net/profile/Zaid_Al-Huda" class="contact-links" style="display: inline-block;">
+                        <i class="fab fa-researchgate"></i> ResearchGate
                     </a>
                 </div>
             </div>
@@ -662,22 +871,68 @@
         <!-- Awards -->
         <section id="awards" class="section">
             <div class="container">
-                <h2 class="section-title">Awards & Recognition</h2>
-                <div class="awards-grid">
-                    <div class="award-item">
-                        <div class="award-icon"><i class="fas fa-trophy"></i></div>
-                        <h3>National Foreign Experts Programme</h3>
-                        <p>Principal Investigator for Young Foreign Talents project (2023-2024)</p>
+                <h2 class="section-title">Funding Projects & Patents</h2>
+                
+                <!-- Funding Projects -->
+                <div style="margin-bottom: 4rem;">
+                    <h3 style="font-size: 1.5rem; color: #2c3e50; margin-bottom: 2rem; text-align: center; border-bottom: 2px solid #3498db; padding-bottom: 0.5rem;">
+                        <i class="fas fa-coins"></i> Funding Projects
+                    </h3>
+                    <div class="awards-grid">
+                        <div class="award-item">
+                            <div class="award-icon"><i class="fas fa-trophy"></i></div>
+                            <h3>National Foreign Experts Programme</h3>
+                            <p><strong>Principal Investigator (PI)</strong><br>
+                            Ministry of Science and Technology of China<br>
+                            Project: "Developing a Cost-Effective Crack Segmentation System using Generic Cameras"<br>
+                            <strong>Jan 2023 - Dec 2024</strong><br>
+                            Grant No: QR2023166002L</p>
+                        </div>
+                        <div class="award-item" style="background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);">
+                            <div class="award-icon"><i class="fas fa-flask"></i></div>
+                            <h3>Natural Science Foundation of Sichuan</h3>
+                            <p><strong>Co-Principal Investigator (Co-PI)</strong><br>
+                            Project: "Research on dermoscopic image segmentation technology based on weakly supervised pseudo-label enhancement"<br>
+                            <strong>Jan 2022 - Dec 2023</strong><br>
+                            Grant No: 2022NSFSC0502</p>
+                        </div>
+                        <div class="award-item" style="background: linear-gradient(135deg, #f093fb 0%, #f5576c 100%);">
+                            <div class="award-icon"><i class="fas fa-search"></i></div>
+                            <h3>National Science Foundation of China (NSFC)</h3>
+                            <p><strong>Investigator</strong><br>
+                            Project: "Research on the Evaluation of Hierarchical Image Segmentation Quality"<br>
+                            <strong>Jan 2018 - Dec 2021</strong><br>
+                            Grant No: 61772435</p>
+                        </div>
                     </div>
-                    <div class="award-item" style="background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);">
-                        <div class="award-icon"><i class="fas fa-medal"></i></div>
-                        <h3>Chinese Government Scholarship</h3>
-                        <p>Full Ph.D. scholarship recipient (2016-2021)</p>
-                    </div>
-                    <div class="award-item" style="background: linear-gradient(135deg, #f093fb 0%, #f5576c 100%);">
-                        <div class="award-icon"><i class="fas fa-star"></i></div>
-                        <h3>Academic Excellence</h3>
-                        <p>2nd place in M.Tech program, University of Hyderabad</p>
+                </div>
+
+                <!-- Patents -->
+                <div>
+                    <h3 style="font-size: 1.5rem; color: #2c3e50; margin-bottom: 2rem; text-align: center; border-bottom: 2px solid #e74c3c; padding-bottom: 0.5rem;">
+                        <i class="fas fa-lightbulb"></i> Patents Awarded
+                    </h3>
+                    <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(400px, 1fr)); gap: 2rem;">
+                        <div style="background: linear-gradient(135deg, #2ecc71 0%, #27ae60 100%); color: white; padding: 2rem; border-radius: 15px; box-shadow: 0 10px 30px rgba(0,0,0,0.2);">
+                            <div style="display: flex; align-items: center; margin-bottom: 1rem;">
+                                <i class="fas fa-patent" style="font-size: 2rem; margin-right: 1rem;"></i>
+                                <h4 style="margin: 0; font-size: 1.2rem;">Patent #1 - Infrastructure AI</h4>
+                            </div>
+                            <p><strong>Title:</strong> Pavement Crack Segmentation Method Based on Class Activation Mapping</p>
+                            <p><strong>Inventors:</strong> Zaid Al-Huda, Tang Tang, Du Fuhe, Peng Bo</p>
+                            <p><strong>Patent No:</strong> ZL 2022 1 0969247.9</p>
+                            <p><strong>Year:</strong> 2023, Chengdu, China</p>
+                        </div>
+                        <div style="background: linear-gradient(135deg, #e67e22 0%, #d35400 100%); color: white; padding: 2rem; border-radius: 15px; box-shadow: 0 10px 30px rgba(0,0,0,0.2);">
+                            <div style="display: flex; align-items: center; margin-bottom: 1rem;">
+                                <i class="fas fa-cogs" style="font-size: 2rem; margin-right: 1rem;"></i>
+                                <h4 style="margin: 0; font-size: 1.2rem;">Patent #2 - Deep Learning</h4>
+                            </div>
+                            <p><strong>Title:</strong> A Method of Target Scale Selection for Multi-level Image Segmentation Based on Deep Seed</p>
+                            <p><strong>Inventors:</strong> Peng Bo, Zaid Al-Huda, Feng Ting, Yang Yan</p>
+                            <p><strong>Patent No:</strong> ZL 2019 1 1389370.8</p>
+                            <p><strong>Year:</strong> 2021, Chengdu, China</p>
+                        </div>
                     </div>
                 </div>
             </div>
@@ -718,7 +973,7 @@
     <!-- Footer -->
     <footer class="footer">
         <div class="container">
-            <p>&copy; 2025 Dr. Zaid Al-Huda. All rights reserved. | Distinguished Associate Research Fellow, Stirling College, CDU</p>
+            <p>&copy; 2025 Dr. Zaid Al-Huda. All rights reserved. | Senior Lecturer (Research Associate Professor), Stirling College, CDU</p>
         </div>
     </footer>
 
@@ -740,3 +995,34 @@
             const scrollPercent = scrollTop / docHeight;
             document.querySelector('.scroll-indicator').style.transform = `scaleX(${scrollPercent})`;
         });
+
+        // Publication filtering functions
+        function showAll() {
+            const sections = document.querySelectorAll('.pub-section');
+            sections.forEach(section => {
+                section.style.display = 'block';
+            });
+            updateActiveFilter('showAll()');
+        }
+
+        function filterByCategory(category) {
+            const sections = document.querySelectorAll('.pub-section');
+            sections.forEach(section => {
+                if (section.getAttribute('data-category') === category) {
+                    section.style.display = 'block';
+                } else {
+                    section.style.display = 'none';
+                }
+            });
+            updateActiveFilter(`filterByCategory('${category}')`);
+        }
+
+        function updateActiveFilter(activeFunction) {
+            const buttons = document.querySelectorAll('.filter-btn');
+            buttons.forEach(btn => {
+                btn.classList.remove('active');
+                if (btn.getAttribute('onclick') === activeFunction) {
+                    btn.classList.add('active');
+                }
+            });
+        }
