@@ -78,20 +78,28 @@
         }
 
         .hero-image img {
-            width: 200px;
-            height: 200px;
+            width: 220px;
+            height: 220px;
             border-radius: 50%;
             border: 4px solid rgba(255,255,255,0.2);
             box-shadow: 0 10px 30px rgba(0,0,0,0.3);
             object-fit: cover;
-            object-position: center;
+            object-position: center top;
+            display: block;
+            image-rendering: high-quality;
             image-rendering: -webkit-optimize-contrast;
+            image-rendering: optimize-contrast;
             image-rendering: crisp-edges;
-            image-rendering: auto;
+            -ms-interpolation-mode: bicubic;
+            -webkit-font-smoothing: antialiased;
+            -moz-osx-font-smoothing: grayscale;
+            transform: translateZ(0);
+            will-change: transform;
+            backface-visibility: hidden;
             -webkit-backface-visibility: hidden;
-            -moz-backface-visibility: hidden;
-            -webkit-transform: translate3d(0, 0, 0);
-            -moz-transform: translate3d(0, 0, 0);
+            max-width: 100%;
+            height: auto;
+            min-height: 220px;
         }
 
         .contact-links {
@@ -535,7 +543,7 @@
                     </div>
                 </div>
                 <div class="hero-image">
-                    <img src="images/ZAID.jpg" alt="Dr. Zaid Al-Huda">
+                    <img src="images/ZAID.jpg" alt="Dr. Zaid Al-Huda" loading="eager" decoding="sync">
                 </div>
             </div>
         </div>
