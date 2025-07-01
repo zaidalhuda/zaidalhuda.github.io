@@ -133,19 +133,131 @@
 
         /* Navigation */
         .nav {
-            background: rgba(255,255,255,0.95);
-            backdrop-filter: blur(10px);
-            box-shadow: 0 4px 20px rgba(0,0,0,0.1);
+            background: white;
+            box-shadow: 0 2px 10px rgba(0,0,0,0.1);
             position: sticky;
             top: 0;
-            z-index: 100;
-            border-bottom: 1px solid rgba(255,255,255,0.2);
-            transition: all 0.3s ease;
+            z-index: 99;
+        }
+        .floating-nav {
+            position: fixed;
+            top: -80px;
+            left: 0;
+            right: 0;
+            background: rgba(255, 255, 255, 0.95);
+            backdrop-filter: blur(15px);
+            box-shadow: 0 4px 25px rgba(0, 0, 0, 0.15);
+            z-index: 1000;
+            transition: transform 0.3s ease, opacity 0.3s ease;
+            opacity: 0;
+            border-bottom: 1px solid rgba(52, 152, 219, 0.2);
         }
 
-        .nav.scrolled {
-            background: rgba(255,255,255,0.98);
-            box-shadow: 0 4px 25px rgba(0,0,0,0.15);
+        .floating-nav.show {
+            transform: translateY(80px);
+            opacity: 1;
+        }
+
+        .floating-nav-content {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 0.8rem 0;
+            max-width: 1200px;
+            margin: 0 auto;
+            padding-left: 20px;
+            padding-right: 20px;
+        }
+
+        .floating-nav-brand {
+            font-weight: 700;
+            color: #2c3e50;
+            font-size: 1.1rem;
+            text-decoration: none;
+        }
+
+        .floating-nav-links {
+            display: flex;
+            gap: 1.5rem;
+            list-style: none;
+            margin: 0;
+            padding: 0;
+        }
+
+        .floating-nav-links a {
+            text-decoration: none;
+            color: #4a5568;
+            font-weight: 600;
+            padding: 0.5rem 1rem;
+            border-radius: 6px;
+            transition: all 0.3s ease;
+            font-size: 0.9rem;
+            white-space: nowrap;
+        }
+
+        .floating-nav-links a.active {
+            background: linear-gradient(135deg, #3498db 0%, #2c3e50 100%);
+            color: white;
+            transform: translateY(-1px);
+        }
+
+        .floating-nav-links a:hover:not(.active) {
+            background: linear-gradient(135deg, #3498db 0%, #2c3e50 100%);
+            color: white;
+            transform: translateY(-1px);
+        }
+
+        .floating-nav-toggle {
+            display: none;
+            background: none;
+            border: none;
+            font-size: 1.3rem;
+            color: #333;
+            cursor: pointer;
+            padding: 0.5rem;
+        }
+
+        /* Mobile Floating Navigation */
+        @media (max-width: 768px) {
+            .floating-nav-toggle {
+                display: block;
+            }
+
+            .floating-nav-links {
+                display: none;
+                position: absolute;
+                top: 100%;
+                left: 0;
+                right: 0;
+                background: rgba(255, 255, 255, 0.98);
+                backdrop-filter: blur(15px);
+                flex-direction: column;
+                gap: 0;
+                padding: 1rem 0;
+                box-shadow: 0 4px 15px rgba(0, 0, 0, 0.1);
+            }
+
+            .floating-nav-links.show {
+                display: flex;
+            }
+
+            .floating-nav-links a {
+                padding: 0.8rem 1.5rem;
+                text-align: center;
+                border-bottom: 1px solid #f0f0f0;
+                margin: 0;
+                border-radius: 0;
+            }
+
+            .floating-nav-links a:last-child {
+                border-bottom: none;
+            }
+        }
+
+        /* Ensure original nav doesn't interfere */
+        .nav {
+            position: relative;
+            z-index: 99;
         }
 
         .nav-content {
@@ -160,12 +272,6 @@
             color: #2c3e50;
             font-size: 1.1rem;
             display: none;
-            opacity: 0;
-            transition: opacity 0.3s ease;
-        }
-
-        .nav.scrolled .nav-brand {
-            opacity: 1;
         }
 
         .nav-toggle {
@@ -194,25 +300,16 @@
 
         .nav-links a {
             text-decoration: none;
-            color: #4a5568;
-            font-weight: 600;
-            padding: 0.7rem 1.2rem;
-            border-radius: 8px;
+            color: #333;
+            font-weight: 500;
+            padding: 0.5rem 1rem;
+            border-radius: 5px;
             transition: all 0.3s ease;
-            position: relative;
-            font-size: 0.95rem;
         }
 
-        .nav-links a.active {
-            background: linear-gradient(135deg, #3498db 0%, #2c3e50 100%);
+        .nav-links a:hover {
+            background: #3498db;
             color: white;
-            transform: translateY(-1px);
-        }
-
-        .nav-links a:hover:not(.active) {
-            background: linear-gradient(135deg, #3498db 0%, #2c3e50 100%);
-            color: white;
-            transform: translateY(-2px);
         }
 
         /* Main Content */
@@ -745,7 +842,6 @@
         @media (max-width: 768px) {
             .nav-brand {
                 display: block;
-                opacity: 1;
             }
 
             .nav-toggle {
@@ -791,11 +887,6 @@
 
             .nav-links a:last-child {
                 border-bottom: none;
-            }
-
-            .nav-links a.active {
-                background: linear-gradient(135deg, #3498db 0%, #2c3e50 100%);
-                color: white;
             }
 
             .hero-content {
@@ -1054,37 +1145,6 @@
             }
         }
 
-        @media (min-width: 769px) {
-            .nav.scrolled .nav-brand {
-                display: block;
-            }
-            
-            .nav-content {
-                justify-content: center;
-                position: relative;
-            }
-            
-            .nav.scrolled .nav-content {
-                justify-content: space-between;
-            }
-            
-            .nav-brand {
-                position: absolute;
-                left: 0;
-                top: 50%;
-                transform: translateY(-50%);
-            }
-            
-            .nav-links {
-                gap: 1.5rem;
-            }
-            
-            .nav-links a {
-                white-space: nowrap;
-                min-width: auto;
-            }
-        }
-
         /* Ensure proper touch targets on mobile */
         @media (max-width: 768px) {
             button, .filter-btn, .nav-links a, .contact-links a {
@@ -1173,7 +1233,7 @@
                     </div>
                 </div>
                 <div class="hero-image">
-                    <img src="images/ZAID_4.jpg" alt="Dr. Zaid Al-Huda" loading="eager" decoding="sync">
+                    <img src=""images/ZAID_4.jpg"" alt="Dr. Zaid Al-Huda" loading="eager" decoding="sync">
                 </div>
             </div>
         </div>
@@ -1200,6 +1260,26 @@
                     <li><a href="#contact" onclick="closeNav()">Contact</a></li>
                 </ul>
             </div>
+        </div>
+    </nav>
+
+    <!-- Floating Navigation Bar -->
+    <nav class="floating-nav" id="floatingNav">
+        <div class="floating-nav-content">
+            <a href="#about" class="floating-nav-brand">Dr. Zaid Al-Huda</a>
+            <button class="floating-nav-toggle" onclick="toggleFloatingNav()">
+                <i class="fas fa-bars"></i>
+            </button>
+            <ul class="floating-nav-links" id="floatingNavLinks">
+                <li><a href="#about" onclick="closeFloatingNav()">About</a></li>
+                <li><a href="#research" onclick="closeFloatingNav()">Research</a></li>
+                <li><a href="#experience" onclick="closeFloatingNav()">Experience</a></li>
+                <li><a href="#teaching" onclick="closeFloatingNav()">Teaching</a></li>
+                <li><a href="#publications" onclick="closeFloatingNav()">Publications</a></li>
+                <li><a href="#awards" onclick="closeFloatingNav()">Awards</a></li>
+                <li><a href="#activities" onclick="closeFloatingNav()">Activities</a></li>
+                <li><a href="#contact" onclick="closeFloatingNav()">Contact</a></li>
+            </ul>
         </div>
     </nav>
 
