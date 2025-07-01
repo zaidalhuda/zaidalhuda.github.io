@@ -419,6 +419,7 @@
             }
         }
 
+        /* Animations for floating nav */
         @keyframes fadeInUp {
             from {
                 opacity: 0;
@@ -1425,21 +1426,21 @@
 <body>
     <div class="scroll-indicator"></div>
 
-    <!-- Floating Navigation -->
+    <!-- Floating Sticky Navigation -->
     <nav class="floating-nav" id="floatingNav">
-        <div class="floating-nav-content">
+        <div class="floating-nav-container">
             <div class="floating-nav-brand">Dr. Zaid Al-Huda</div>
-            <ul class="floating-nav-links" id="floatingNavLinks">
-                <li><a href="#about" onclick="closeFloatingNav()">About</a></li>
-                <li><a href="#research" onclick="closeFloatingNav()">Research</a></li>
-                <li><a href="#experience" onclick="closeFloatingNav()">Experience</a></li>
-                <li><a href="#teaching" onclick="closeFloatingNav()">Teaching</a></li>
-                <li><a href="#publications" onclick="closeFloatingNav()">Publications</a></li>
-                <li><a href="#awards" onclick="closeFloatingNav()">Awards</a></li>
-                <li><a href="#activities" onclick="closeFloatingNav()">Activities</a></li>
-                <li><a href="#contact" onclick="closeFloatingNav()">Contact</a></li>
+            <ul class="floating-nav-menu" id="floatingNavMenu">
+                <li><a href="#about">About</a></li>
+                <li><a href="#research">Research</a></li>
+                <li><a href="#experience">Experience</a></li>
+                <li><a href="#teaching">Teaching</a></li>
+                <li><a href="#publications">Publications</a></li>
+                <li><a href="#awards">Awards</a></li>
+                <li><a href="#activities">Activities</a></li>
+                <li><a href="#contact">Contact</a></li>
             </ul>
-            <button class="floating-nav-toggle" onclick="toggleFloatingNav()">
+            <button class="floating-nav-toggle" id="floatingNavToggle">
                 <i class="fas fa-bars"></i>
             </button>
         </div>
