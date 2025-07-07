@@ -578,29 +578,39 @@
         /* Research Interests */
         .research-grid {
             display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
-            gap: 2rem;
+            grid-template-columns: repeat(3, 1fr);
+            grid-template-rows: repeat(2, 1fr);
+            gap: 2.5rem;
+            max-width: 1200px;
+            margin: 0 auto;
         }
 
         .research-item {
             background: white;
-            padding: 2rem;
-            border-radius: 10px;
-            box-shadow: 0 5px 15px rgba(0,0,0,0.1);
-            border-left: 4px solid #3498db;
-            transition: transform 0.3s ease;
+            padding: 2.5rem;
+            border-radius: 12px;
+            box-shadow: 0 8px 25px rgba(0,0,0,0.12);
+            border-left: 5px solid #3498db;
+            transition: transform 0.3s ease, box-shadow 0.3s ease;
         }
 
         .research-item:hover {
-            transform: translateY(-5px);
+            transform: translateY(-8px);
+            box-shadow: 0 12px 35px rgba(0,0,0,0.18);
         }
 
         .research-item h3 {
             color: #2c3e50;
-            margin-bottom: 1rem;
+            margin-bottom: 1.2rem;
             display: flex;
             align-items: center;
-            gap: 0.5rem;
+            gap: 0.7rem;
+            font-size: 1.1rem;
+        }
+
+        .research-item p {
+            font-size: 1rem;
+            line-height: 1.6;
         }
 
         /* Experience Timeline */
@@ -1059,7 +1069,14 @@
             }
             
             .research-grid {
-                grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+                grid-template-columns: repeat(2, 1fr);
+                grid-template-rows: repeat(3, 1fr);
+                gap: 2rem;
+                max-width: 900px;
+            }
+            
+            .research-item {
+                padding: 2rem;
             }
         }
 
@@ -1184,11 +1201,12 @@
 
             .research-grid {
                 grid-template-columns: 1fr;
+                grid-template-rows: repeat(6, 1fr);
                 gap: 1.5rem;
             }
 
             .research-item {
-                padding: 1.5rem;
+                padding: 1.8rem;
             }
 
             .teaching-grid {
@@ -1925,9 +1943,9 @@
                         <i class="fas fa-lightbulb"></i> Patents Awarded
                     </h3>
                     <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(400px, 1fr)); gap: 2rem;">
-                        <div style="background: linear-gradient(135deg, #2ecc71 0%, #27ae60 100%); color: white; padding: 2rem; border-radius: 15px; box-shadow: 0 10px 30px rgba(0,0,0,0.2);">
+                        <div style="background: linear-gradient(135deg, #3498db 0%, #2c3e50 100%); color: white; padding: 2rem; border-radius: 15px; box-shadow: 0 10px 30px rgba(0,0,0,0.2);">
                             <div style="display: flex; align-items: center; margin-bottom: 1rem;">
-                                <i class="fas fa-patent" style="font-size: 2rem; margin-right: 1rem;"></i>
+                                <i class="fas fa-road" style="font-size: 2rem; margin-right: 1rem;"></i>
                                 <h4 style="margin: 0; font-size: 1.2rem;">Patent #1 - Infrastructure AI</h4>
                             </div>
                             <p><strong>Title:</strong> Pavement Crack Segmentation Method Based on Class Activation Mapping</p>
@@ -1935,9 +1953,9 @@
                             <p><strong>Patent No:</strong> ZL 2022 1 0969247.9</p>
                             <p><strong>Year:</strong> 2023, Chengdu, China</p>
                         </div>
-                        <div style="background: linear-gradient(135deg, #e67e22 0%, #d35400 100%); color: white; padding: 2rem; border-radius: 15px; box-shadow: 0 10px 30px rgba(0,0,0,0.2);">
+                        <div style="background: linear-gradient(135deg, #8e44ad 0%, #2c3e50 100%); color: white; padding: 2rem; border-radius: 15px; box-shadow: 0 10px 30px rgba(0,0,0,0.2);">
                             <div style="display: flex; align-items: center; margin-bottom: 1rem;">
-                                <i class="fas fa-patent" style="font-size: 2rem; margin-right: 1rem;"></i>
+                                <i class="fas fa-brain" style="font-size: 2rem; margin-right: 1rem;"></i>
                                 <h4 style="margin: 0; font-size: 1.2rem;">Patent #2 - Deep Learning</h4>
                             </div>
                             <p><strong>Title:</strong> A Method of Target Scale Selection for Multi-level Image Segmentation Based on Deep Seed</p>
