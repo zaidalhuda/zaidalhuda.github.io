@@ -1168,6 +1168,12 @@
                 display: none;
             }
 
+            /* Fix Patents section for mobile */
+            #awards .container > div:last-child > div[style*="grid-template-columns"] {
+                grid-template-columns: 1fr !important;
+                gap: 1.5rem !important;
+            }
+
             .section {
                 padding: 2rem 0;
             }
@@ -1544,7 +1550,7 @@
                         <h3 style="margin-bottom: 1rem; color: #2c3e50;">Research Impact</h3>
                         <div class="stat-item">
                             <span>Journal Articles</span>
-                            <span class="stat-value">35+</span>
+                            <span class="stat-value">40+</span>
                         </div>
                         <div class="stat-item">
                             <span>Conference Papers</span>
